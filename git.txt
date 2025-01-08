@@ -1,0 +1,174 @@
+git init #initialize git directory
+rm -rf .git or Recurse Item -Recurse -Force .git #to remove git subDir
+git revert commit_hash # git creates a new commit that reverses the changes made by mentioned commit_hash
+#--------------------------------------------------------------------------------------------------
+git add . #temp staging area where all the staged files are held, only the changes made in the file are staged, not he entire file unless
+#entire file is chnaged. It keeps track of modified,added or deleted
+git diff --staged # it shows the lines that are staged
+#--------------------------------------------------------------------------------------------------
+git commit -m "message" #local datastore that stores as key:value => commit id(sha01 hashed):file content(zlib compressed)
+git log --pretty=fuller #history of commits
+#note git commit messages must include "what changes i made? what can u expect?"
+#--------------------------------------------------------------------------------------------------
+git push origin branch_name #if locally and remotely on same branch_name
+git push origin src_branch:dest_branch #when im localy on src_branch and want to pusg to dest_branch in repo
+#--------------------------------------------------------------------------------------------------
+git clone repo_url
+cd repo_name #by default local folder dir will have same name as repo_name
+#--------------------------------------------------------------------------------------------------
+git checkout -b branch_name #to create a new branch
+git checkout branch_name  #only changes to mentioned branch
+#rename branch
+git branch -m old_name new_name
+git branch #to check current working branch
+#--------------------------------------------------------------------------------------------------
+git pull #pull the updated changes from repo and merge into local from upstream branch
+git fetch #only pull the updated changes from upstream branch
+git merge #only merge with local branch from upstream branch
+#--------------------------------------------------------------------------------------------------
+git merge #make a new branch from parent branches
+git rebase #update  a given branch to the commit changes from new branch
+#--------------------------------------------------------------------------------------------------
+git config --global user. name "vibhaalbus14"
+git config --global user.email "vibhaa.ha@gmail.com"
+git --congif list #to list configurations that was set
+#--------------------------------------------------------------------------------------------------
+#to link local repo to remote repo
+git remote add  ref_name remote_repo_url
+git push ref_name to_which_branch_u_like_to_push
+#--------------------------------------------------------------------------------------------------
+#add the default branch to remote repo
+git remote -m branch_name ref_name repo_url
+git push ref_name #this automatically pushes the changes to default branch of ref_name url repo
+
+#--------------------------------------------------------------------------------------------------
+
+#git diff
+lets say commit order is 
+*initial commit
+*commit 1
+*commit 2
+so commit 1 points to initial commit and will store changes wrt initial commit
+similarly,commit 2 points to its parent commmit 1, and stores changes wrt commit 1 only
+git diff initial_commit_hash commit1_hash #its shows changes made to commit 1 wrt initial commit
+git diff commit1_hash commit2_hash
+git diff parent_commit_hash child_commit_hash
+
+#---------------------------------------------------------
+git commit --amend -m "new_commit_mssg"
+git push --force
+
+#--------------------------------------------------------
+#git revert
+#1.history is preserved
+#2.new commit is created by git by a default message
+#3.this commit will undo changes specified using commit_hash
+#4.a--b--c are commits in main branch
+if i want to revert changes to say commit b then git creates a new commit b' with a def commit message
+a--b--c--b', history remians preserved
+    
+git revert commit_hash
+
+
+#--------------------------------------------------------
+#git rebase
+#1.history of feature_branch is not preserved
+say a--b --c are the commits in feature_branch
+e--d are the commit in main branch
+checkout to feature_branch and say git rebase main
+this creates new commits same as a , b,c but with diff hashes a',b',c' and applies on main branch
+e--d--a'--b'--c'
+thus the commits a,b,c are deleted from history
+
+#------------------------------------------------------------
+#git reset
+#1.deletes the history permanently,including staging area and remote directory
+#2.moves the head pointer to specified commit
+
+git reset --hard commit_hash
+ say a--b--c--d(head) and i do
+ git reset --hard b
+ this becomes a--b(head)
+ thus all other commits are deleted
+
+
+ #------------------------------------------------------------
+ git blame:used to identify who?when?where?what? changes were made to a specific file along 
+ the hashes of their commit
+
+ git blame file_name
+
+ #----------------------------------------------------------------------------
+ git bisect
+1.why? git bisect helps to identify the origin of bug in a commit via binary search
+steps:
+git bisect start
+#mark a commit as bad 
+git bisect commmit7_hash bad
+git bisect commit3_hash good
+2.now bw commits 3,4,5,6,7 git tries to identify the origin
+3.it gives contents of commit5 first, we examine and if its good we give git commit5_hash good,
+ then git searches for bad commit bw 5 to 7, else if commit5_hash was given as bad, it searches bw
+ 3 and 5
+4.once git gives the commmit that had the bag
+5.type git bisect exit to stop bisect process
+
+
+#----------------------------------------------------------------------------------------
+git patch
+why?
+ans. patch is used to add all the commits made in a file and then email or share
+purpose? if a person making changes to a repo does not have permission to push, the he can add 
+all commits to a file and share it to owner.Owner can then apply and commit to their local repo,
+go through the changes and the push to repo
+
+#git forms its own file aka patch file with random name and stores all mentioned commits
+git format-patch  - 1 commit_hash #for specified commit
+git format-patch commit_hash1..commit_hash4 #for a range of commits
+#this patch file can then be shared
+#this is the command that owner of repo runs to apply and commit to local repo
+git am patch_file
+
+#---------------------------------------------------------------------------------------
+git submodule
+what? git submodue is a child repo inside a parent repo
+Parent repo only monitors specific commit of child repo but not child repo's history
+To update and pull changes in submodule, navigate to subfolder and git pull
+later, come back to parent folder and hit commit
+Both parent and child repo have diff histories
+
+purpose? external repo can be managed as dependencies in our repo
+
+#to add  a repo as submodule
+git submodule add submod_repo_url submod_folder
+
+#to clone a repo that already has submodules
+1.clone parent_repo_url
+2.cd parent_repo_url
+3.git submodule --init --recursive #this fetches all the submodules
+
+#to update a submodule
+1.cd submodule
+2.git pull
+3.cd back to parent_repo
+4.git commit -m "commit made in submodule"
+
+#to delete a submodule
+1.delete all .gitmodules
+2.delete .git in nested repo
+3.delete submod folder
+4.commit changes in parent repo
+
+#------------------------------------------------------------------------------------
+git stash
+why? when we are on a different branch say branchA and make changes, be it staged or unstaged,
+git wont allow us to switch branches. But we need to immediately  switch to branchB.To keep the 
+staged/unstaged changes intact, we stash  them.Thus ,it can be retrieved from stash as and when needed.
+Therefore, stashing is temp storage.
+
+1.git stash message -m "unstaged chnages from branchA"
+2.git checkout branchB
+3.git stash list
+4.git stash apply stash@{n}
+5.git stash drop stash@{n} / git stash pop
+6.git stash clear
