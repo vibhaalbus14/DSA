@@ -83,7 +83,10 @@
 #     return fact[n]
 # print(helper(50))
 # 
-shifts=[3,5,9]
-perfixSum=[0 for i in range(len(shifts)+1)]
-print(128%26)
-print((128%26)+97)
+# shifts=[3,5,9]
+# perfixSum=[0 for i in range(len(shifts)+1)]
+# print(128%26)
+# print((128%26)+97)
+
+s="0000"
+print(list(s))
