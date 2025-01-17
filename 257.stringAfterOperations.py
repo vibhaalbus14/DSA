@@ -34,6 +34,7 @@ class Solution:
         return n-len(visited)
 print(Solution().minimumLength("ucvbutgkohgbcobqeyqwppbxqoynxeuuzouyvmydfhrprdbuzwqebwuiejoxsxdhbmuaiscalnteocghnlisxxawxgcjloevrdcj"))
 #------------------------------------approach2------------------------------------------
+from collections import Counter
 class Solution:
     def minimumLength(self, s: str) -> int:
         hashMap=Counter(s)

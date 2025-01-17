@@ -37,6 +37,7 @@ class Solution:
         #treat "0" lock as wildcard
         if n==1:
             return False
+        
         minLeft,maxLeft=0,0
 
         for i,paren in enumerate(s):
@@ -53,7 +54,7 @@ class Solution:
                 return False
             
             if minLeft<0: #we can maybe not change "0" locks to ")"
-            #its revocable
+            #its revokable
                 minLeft=0
                 minLeft+=1 #because u can only change *->"(" or ")", if minleft<0 it means
                 #changing to ")" didnt work, so change it to "("
