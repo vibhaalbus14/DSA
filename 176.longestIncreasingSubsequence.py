@@ -67,7 +67,7 @@ class Solution:
                 else:
                     l=mid+1
             return l
-
+#10,9,2,5,3,7,101,18------------------------> stack:2,3,7,18 a correct insertion position for 9=>binary search
         stack=[]
         count=0
         for num in nums:
