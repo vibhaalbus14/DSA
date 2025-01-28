@@ -88,5 +88,9 @@
 # print(128%26)
 # print((128%26)+97)
 
-s="0000"
-print(list(s))
+# s="0000"
+# print(list(s))
+
+nums=[1,0,0,2,1,4,7,8,9,6,7,10,8]
+for i, num in enumerate(nums):
+    print(i,num)

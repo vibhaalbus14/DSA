@@ -70,3 +70,43 @@ class Solution(object):
                 vIndex=sortedNodes.index(v)
                 output.append(uIndex<vIndex)
         return output
+
+#----------------------------approach 2--------------------------------------
+class Solution:
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        #see if must can reach take, if yes=> true
+
+        adjList=defaultdict(list)
+        for must,take in prerequisites:
+            adjList[must].append(take)
+       
+        storedTable={}
+        for i in range(numCourses):
+            storedTable[i]=set()
+        visited=set()
+        #run this function once to map all children to parent
+        @cache
+        def dfs(node):
+            currSet=set()
+            if node in adjList:
+                for neighbour in adjList[node] :
+                    #if neighbour not in visited:
+                    visited.add(neighbour)
+                    currSet.update(dfs(neighbour))
+                    currSet.add(neighbour)
+
+            storedTable[node].update(currSet)
+            return currSet
+        
+        for i in range(numCourses):
+            if i not in visited:
+                visited.add(i)
+                dfs(i)
+        #print(storedTable)
+
+        ans=[]
+        for must,take in queries:
+            ans.append(take in storedTable[must])
+        return ans
+                
+        
