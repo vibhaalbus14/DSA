@@ -172,3 +172,11 @@ Therefore, stashing is temp storage.
 4.git stash apply stash@{n}
 5.git stash drop stash@{n} / git stash pop
 6.git stash clear
+
+#----------------------------------------------------------------------------------------
+An upstream branch is the connection between your local branch and the remote branch.
+
+When you set an upstream branch, Git knows:
+
+Where to pull updates from.
+Where to push your changes.

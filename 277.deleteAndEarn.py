@@ -1,5 +1,5 @@
-from typng import List
-from collections import lru_cache
+from typing import List
+from collections import lru_cache,Counter
 
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
