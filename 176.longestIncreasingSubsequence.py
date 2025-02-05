@@ -78,3 +78,20 @@ class Solution:
                 stack[index]=num
         return len(stack)
 
+#----------------------------approach-------------------------------------------
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        n=len(nums)
+
+        @cache(None)
+        def helper(index,cmpVal):#1,3,5,4,7
+            if index>=n:
+                return 0 #length,occurence
+            exclude=helper(index+1,cmpVal)
+            include=1
+            if nums[index]>cmpVal:
+                include=max(include,helper(index+1,nums[index])+1)
+            #pass on longest length and its occurence
+            return max(include,exclude)
+           
+        return helper(0,float("-inf"))
