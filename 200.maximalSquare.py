@@ -97,3 +97,32 @@ class Solution:
                     maxSide=max(maxSide,helper(i,j))
 
         return maxSide*maxSide #to form area
+    
+#-------------------------------------tabulation------------------------------------------------------
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        #dp tabulation 
+        #dp array stores the max side length possible
+        #start from top left
+        #check if every cell can be the right-bottom of a square
+        #must consider the diagonal,left and p of the cell
+        #take min+1
+
+        rows=len(matrix)
+        cols=len(matrix[0])
+        maxSide=0
+
+        dp=[[0]*cols for _ in range(rows)]
+
+        for i in range(rows):
+            for j in range(cols):
+                if matrix[i][j]=="0":
+                    dp[i][j]=0
+                else:
+                    if i==0 or j==0:
+                        dp[i][j]=1
+                    else:
+                        dp[i][j]=min((dp[i-1][j-1],dp[i-1][j],dp[i][j-1]))+1
+                    maxSide=max(maxSide,dp[i][j])
+        return maxSide*maxSide
+
