@@ -111,6 +111,50 @@ class Solution:
             return -1
 
 
+#-------------------------------optimal code TC:O(n)-----------------------------------------------
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        #approach
+        #1.identify the rotated index=> index of the samllest number
+        #2.loop over regualr array but map the indices to rotated array
 
+        n=len(nums)
+        if n==1:
+            return 0 if target in nums else -1
+        l=0
+        r=n-1
+        rotIndex=None
+
+        while l<=r:
+            mid=(l+r)//2
+            
+            if nums[mid]<nums[mid-1]:
+                rotIndex=mid
+                break
+            if nums[mid]<nums[-1]:
+                #go towards left
+                r=mid-1
+            else:
+                #towards right
+                l=mid+1
+        
+        #loop over regular array, but map the indices to rotated array
+        l=0
+        r=n-1
+
+        while l<=r:
+            mid=(l+r)//2
+            rotated_mid=(mid+rotIndex)%n
+
+            #check in rotated array
+            if nums[rotated_mid]==target:
+                return rotated_mid
+            if nums[rotated_mid]<target:
+                l=mid+1 #make changes wrt to the regualr sorted array
+            else:
+                r=mid-1
+        return -1
+
+        
 
         

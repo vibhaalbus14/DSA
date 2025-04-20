@@ -43,3 +43,31 @@ class Solution(object):
 object=Solution()
 print(object.canPartition([1,2,3,4,5]))
         
+#-------------------------optimal------------------------
+from typing import List
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        if total%2:
+            return False
+
+        l = len(nums)
+        target = total//2
+        nums.sort(reverse=True)
+        memo={}
+
+        
+        def dfs(i, curr):
+            if i>=l or curr>target:
+                return False
+            if (i,curr) in memo:
+                return memo[(i,curr)]
+            if curr+nums[i]==target: #include step
+                return True
+            include=dfs(i+1,nums[i]+curr)
+            if not include:
+                exclude=dfs(i+1,curr)
+            memo[(i,curr)]=include or exclude
+            return include or exclude
+
+        return dfs(0, 0)

@@ -1,6 +1,5 @@
 from typing import Counter
 
-
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
         #approach

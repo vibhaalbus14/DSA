@@ -22,3 +22,34 @@ class Solution:
                 catchTime=timeA
         return fleet
             
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        #approach
+        #1. convert 2d-> 1d
+        #2.calculate time taken by each car to reach the target (x2-x1)/speed
+        #3.sort the time acc to positions in descending order. why?
+        #easier to compare overtaking times
+
+        time=[]
+        for i in range(len(position)):
+            time.append((position[i],(target-position[i])/speed[i])) #position,time taken to reach target
+
+        time.sort(key=lambda x:-x[0])
+
+        fleet=0
+        currTime=None
+
+        for pos,reachTime in time:
+            if currTime==None:
+                currTime=reachTime
+                fleet+=1
+            # else:
+            #     if reachTime<=currTime:#belongs to same fleet
+            #         pass
+            elif reachTime>currTime: #different fleet
+                currTime=reachTime
+                fleet+=1
+
+        return fleet
+                    
+
