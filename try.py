@@ -1,2 +1,4 @@
-temp="1212"
-newTemp=temp[:2].split()
+listOfStr=["vibha","vishu"]
+print(listOfStr)
+listOfStr[1]="vasu"
+print(listOfStr)
