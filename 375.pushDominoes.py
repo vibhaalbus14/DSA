@@ -1,3 +1,4 @@
+import heapq
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
         #approach
