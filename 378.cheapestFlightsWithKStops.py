@@ -10,7 +10,7 @@ class Solution:
             adjList[u].append((v, w))
 
         minHeap = [(0, src, 0)]  # (price, node, stops)
-        visited = {}
+        visited = {} #node= [price]
 
         while minHeap:
             price, node, stops = heapq.heappop(minHeap)
@@ -20,9 +20,9 @@ class Solution:
 
             # track the visit of every node,along with the steps it took to visit
             #if node is already visited with less stop than current stop, skip this iteration
-            if node in visited and visited[node] <= stops:
+            if node in visited and visited[node] <= price:
                 continue
-            visited[node] = stops
+            visited[node] = price
 
             if stops <= k:
                 for neighbor, nextCost in adjList[node]:
