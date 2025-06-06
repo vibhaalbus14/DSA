@@ -1,3 +1,4 @@
+from collections import defaultdict
 class Solution:
     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
         #identify the eqyuivalence
@@ -26,7 +27,6 @@ class Solution:
                     if first!=None and second!=None:
                         break
                 if first!=second:
-
                     storage[first].update(storage[second])
                     storage[second].update(storage[first])
                     
