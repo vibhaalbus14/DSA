@@ -26,7 +26,7 @@ class Solution:
 
                     if first!=None and second!=None:
                         break
-                if first!=second:
+                if first is not None and second is not None and first != second:
                     storage[first].update(storage[second])
                     storage[second].update(storage[first])
                     
