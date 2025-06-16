@@ -11,6 +11,7 @@ class Solution:
         #4.if yes, try to minimise the threshold since we have to minimize the the overall op
         #5.if we cant find 'p' pairs within th egiven threshold, we increase the threshold val and repeat
         #6. final threshold is the answer
+        #7.time comp nlog(m) => n=len(nums) and m is binary search range
 
         n=len(nums)
 
