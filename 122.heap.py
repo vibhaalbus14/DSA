@@ -41,12 +41,21 @@ class MaxBinaryHeap:
         #remove the first element from array
         #make the last element the first element
         # pass this index to bubble down
+
+        #check if the heap is empty before accessing top value
+        if not self.heap:
+            return None
+        
+        if len(self.heap)==1: #only one ele
+            return self.heap.pop()
+        
         maxValue=self.heap[0]
-        if len(self.heap)>0:
-            lastVal=self.heap.pop()
-            self.heap[0]=lastVal
-            self.bubbleDown(self.heap,0) 
+        lastVal=self.heap.pop()
+        self.heap[0]=lastVal
+        self.bubbleDown(self.heap,0) 
         return maxValue
+            
+        
     
     def insert(self,val):
         #insert the value at the end of heap

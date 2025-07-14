@@ -2,7 +2,7 @@
 in 1, we were asked to list all possible partitions, hence bactracking was used
 in 2, we were asked to identify min cuts, keeping track of partitions wasnt necessary,so , dp
 in both the approaches, the way partition is generated is same move the indices, identify first valid 
-palindrome partition and then recursion, but the difference lies in "do we need to store the partions
+palindrome partition and then recursion, but the difference lies in "do we need to store the partitions
 or not"
 '''
 class Solution:

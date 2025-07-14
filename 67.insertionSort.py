@@ -13,7 +13,7 @@ def insertion_sort(array):
         #check the sorted array elements
             i=j-1
             temp=array[j]
-            while array[j]>temp and j>=0:
+            while array[i]>temp and i>=0:
                 array[i+1]=array[i]
                 i-=1
             array[i+1]=temp
