@@ -1,3 +1,7 @@
+#here W= capacity of sack
+#arr=[[val,weight]]
+#n=no of items
+
 def fractionalknapsack(W,arr,n):
     def profitByWeight(a):
          return a[0]/a[1]
@@ -21,3 +25,22 @@ print(fractionalknapsack(25,[[70, 10], [90, 20], [150, 30]],3))
 #          return a[0]/a[1]
 # arr.sort(reverse=True,key=profitByWeight)
 # print("array after sorting :" ,arr)
+
+#here value=list of values
+#weight=list of weights
+#W=capacity of sack
+def fractional_knapsack(W, value, weight):
+    n = len(value)
+    items = sorted([(value[i] / weight[i], i) for i in range(n)], reverse=True)
+
+    total_value = 0
+    rem_weight = W
+
+    for ratio, i in items:
+        if rem_weight == 0:
+            break
+        take = min(rem_weight, weight[i])
+        total_value += take * ratio
+        rem_weight -= take
+
+    return total_value
