@@ -1,5 +1,5 @@
 #time comp= O(n^2 xn) why? for every start,end there are k iterations => if n=no of matrices,
-#we iterate through all matrices=>1,4->2,4->3,4 and k operations from sart,end for each
+#we iterate through all matrices=>1,4->2,4->3,4 and k operations from start,end for each
 #space comp:O(n^2)+O(n) memo + rec call stack
 def matrixMultiplication(N, arr):
     #approach
