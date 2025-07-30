@@ -6,7 +6,7 @@ def matrixMultiplication(N, arr):
     #1.send valid matrices indices
     #2.partition the arr into two matrices
     #3.opsPerformed=cost of multplying these to matrices
-    #4.but if these 2 partiotions arent made upof single matrix, then the partion has to be split
+    #4.but if these 2 partitions arent made upof single matrix, then the partion has to be split
     #again recursively
     #=> partition strategy
 
